@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register and Login</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+	<!-- <div class="header bg-dark">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light ">
+                <a class="navbar-brand header-logo text-light" href="#"></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#">Sign In</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div> -->
+
+	<div class="header bg-dark">
+        <div class="container bg-dark">
+            <div class="row">
+                <div class="col-md-6">
+                    <a class="navbar-brand header-logo text-light" href="#">Your Logo</a>
+                </div>
+                <div class="col-md-6">
+                    <a class="sign-in-link float-right text-light" href="#">Sign In</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Register</h2>
+                <form action="/api/auth/register" method="POST">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+					<div class="form-group">
+                        <label for="username">Email:</label>
+                        <input type="text" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+					<div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+					<button type="submit" class="btn btn-primary">cancel</button>
+				</div>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Login</h2>
+                <form action="/api/auth/login" method="POST">
+                    <div class="form-group">
+                        <label for="loginUsername">Username:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+					<div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+					<button type="submit" class="btn btn-primary">cancel</button>
+				</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
