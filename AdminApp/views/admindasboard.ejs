@@ -36,13 +36,13 @@
         </li>
         -->
         <li class="nav-item">
-            <a class="nav-link" href="/admin/newsForm">NewsForm</a>
+            <a class="nav-link" href="/api/auth/newsForm">NewsForm</a>
           </li>
         <li class="nav-item active">
-          <a class="nav-link" href="/admin/getNews">EditNews</a>
+          <a class="nav-link" href="/api/auth//getNews">EditNews</a>
         </li>
         <li class="nav-item">
-                <a class="nav-link" href="/admin/logout">Logout</a>
+                <a class="nav-link" href="/api/auth/logout">Logout</a>
         </li>
       </ul>
     </div> 
@@ -167,7 +167,7 @@
         console.log('id is '+id)
         $.ajax({
             type: 'POST',
-            url: '/admin/find_by_id',
+            url: '/api/auth/find_by_id',
             data: {id},
             success: function(data){
                     $("#update_id").attr("value", data[0]._id)
@@ -191,7 +191,7 @@
             //console.log(">>>>>", data)
             //e.preventDefault();
             $.ajax({
-                url: '/admin/updateNews',
+                url: '/api/auth/updateNews',
                 type:'PUT',
                 data : data,
                 success: function(data){
@@ -214,7 +214,7 @@
         if(response === true){
             $.ajax({
                 type: 'DELETE',
-                url: '/admin/deleteNews',
+                url: '/api/auth/deleteNews',
                 method: 'delete',
                 data: {id},
                 success: function(data){

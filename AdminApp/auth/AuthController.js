@@ -107,13 +107,82 @@ router.get('/loginedUser', function(req, res) {
                 if(err) return res.status(500).send('There was a problem registering user')
                 console.log(`Inserted ... ${data} `)
                 const htmlMsg = encodeURIComponent('Added News DONE !');
-                res.redirect('/newsForm/?msg=' + htmlMsg)
+                res.redirect('/api/auth/loginedUser/?msg=' + htmlMsg)
             })            
 
         })
     })
 })
 
+
+router.get('/getNews', (req, res)=>{
+  const token = localStorage.getItem('authtoken')
+  console.log("token>>>",token)
+  if (!token) {
+      res.redirect('/')
+  }
+  jwt.verify(token, config.secret, (err, decoded)=>{
+      if (err) { res.redirect('/') }
+      User.findById(decoded.id, { password: 0}, (err,user)=>{
+          if (err) {res.redirect('/')}
+          if (!user) {res.redirect('/')} 
+          console.log("/newsForm : user ==> ", user)   
+
+          Newslist.find({}, (err,data)=>{
+              if(err) res.status(500).send(err)
+              else{
+                  res.render('admindasboard', {
+                      user,
+                      data
+                  })
+              }        
+          })
+        
+      })
+  })
+})
+
+router.post('/find_by_id', (req,res)=>{
+  const id = req.body.id
+  console.log("/find_by_id : id : ", id)
+  Newslist.find({_id: id}, (err,data)=>{
+      if(err) res.status(500).send(err)
+      else{
+          console.log("/find_by_id : data : ", data)
+          res.send(data)
+      }
+  })
+})
+
+router.put('/updateNews', (req,res)=>{
+  const id = req.body.id
+  console.log("/updateNews : id : ", id)
+  Newslist.findOneAndUpdate({_id: id},{
+      $set:{
+          title: req.body.title,
+          description: req.body.description,
+          url: req.body.url,
+          urlToImage: req.body.urlToImage,
+          publishedAt: req.body.publishedAt,
+          insertTime: Date.now()
+      }
+  },{
+      upsert: true
+  }, (err,result)=>{
+      if(err) return res.send(err)
+      res.send("Updated ...")
+  }) 
+})
+
+router.delete('/deleteNews', (req,res)=>{
+  const id = req.body.id
+  console.log("/deleteNews : id : ", id)
+  Newslist.findOneAndDelete({_id: id}, (err,result)=>{
+      if(err) return res.status(500).send(err)
+      res.send({message: 'deleted ...'})
+      console.log(result)
+  })
+})
 
 router.get("logout", (err,data)=>{
   localStorage.removeItem('authtoken')
