@@ -51,15 +51,37 @@ const newslist=()=>{
         }        
     })      
 }
+
+app.get('/getNews', (req, res)=>{
+  
+ 
+  
+            Newslist.find({}, (err,data)=>{
+                if(err) res.status(500).send(err)
+                else{
+                    res.send({
+                        data
+                    })
+                }        
+            })
+     
+  })
+
 app.get('/', async(req, res) => 
 {
     const weather1= await getWeather("12.97","77.59");
     const weather=weather1.data
     console.log(weather.main.temp)
-    const news= newslist();
-  
-    console.log('weather',weather,news)
-    res.render('home',{weather})
+    //const news= newslist();
+    Newslist.find({}, (err,news)=>{
+        if(err) res.status(500).send(err)
+        else{
+            //console.log(data)
+            res.render('home',({news,weather}))
+        }        
+    })
+    //console.log('weather',weather,data)
+    //res.render('home',{weather})
 }); // Homepage
 
 
